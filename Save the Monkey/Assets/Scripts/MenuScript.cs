@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
+    private void Awake()
+    {
+        UnityAdManagerScript.ShowBanner();
+    }
+
     public bool transmit = false;
 
     void Update()

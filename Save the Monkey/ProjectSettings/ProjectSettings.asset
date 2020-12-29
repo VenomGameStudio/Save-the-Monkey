@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2020.1.1
+  bundleVersion: 2020.1.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -172,8 +172,8 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.VenomGameStudio.SavetheMonkey
   buildNumber: {}
-  AndroidBundleVersionCode: 3
-  AndroidMinSdkVersion: 26
+  AndroidBundleVersionCode: 4
+  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 29
   AndroidPreferredInstallLocation: 1
   aotOptions: 

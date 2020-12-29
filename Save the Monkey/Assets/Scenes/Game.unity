@@ -725,8 +725,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 706838950}
-        m_MethodName: PlayInterstitialAd
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: StanderedAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: ShowBanner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1279,52 +1290,6 @@ Transform:
   m_Father: {fileID: 1431509821}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &706838949
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 706838951}
-  - component: {fileID: 706838950}
-  m_Layer: 0
-  m_Name: AdManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &706838950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706838949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24a511731fe68e4c8868b959234183f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTargetPlayStore: 1
-  isTestAd: 0
-  isRunning: 0
---- !u!4 &706838951
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706838949}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &784040424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,8 +1383,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 706838950}
-        m_MethodName: PlayInterstitialAd
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: StanderedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1802,8 +1767,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 706838950}
-        m_MethodName: PlayInterstitialAd
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: StanderedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2077,6 +2042,7 @@ GameObject:
   - component: {fileID: 1046900894}
   - component: {fileID: 1046900898}
   - component: {fileID: 1046900899}
+  - component: {fileID: 1046900900}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2195,6 +2161,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 2143077656}
   gameOverUI: {fileID: 1010742242}
+--- !u!114 &1046900900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046900893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7747543554ca8fb44beab9007cc4b2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1071571747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,7 +2901,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPaterns:
   - {fileID: 749964694463973129, guid: 8269e940d9fd1e2418250636bcee99f1, type: 3}
-  - {fileID: 6307872117682668328, guid: 841670c5b830dd645b067e37b87d2543, type: 3}
   - {fileID: 3500828967520405490, guid: 093d667359155ce4e846256279512005, type: 3}
   startTimeBtwSpawn: 2
   decTime: 0.05
@@ -3281,6 +3258,75 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1580117726
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573564075378114562, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896499992505592513, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d,
+        type: 3}
+      propertyPath: m_Name
+      value: AdManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bad44c6eb5d9e4a41a1be1cc47f51d5d, type: 3}
 --- !u!1 &1598876428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,8 +3600,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 706838950}
-        m_MethodName: PlayInterstitialAd
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: StanderedAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: ShowBanner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3949,6 +4006,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1046900899}
         m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1046900900}
+        m_MethodName: StanderedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
