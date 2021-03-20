@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AdsTesterScript : MonoBehaviour
 {
+    public static AdsTesterScript instace;
+    
     public void StanderedAd()
     {
         UnityAdManagerScript.ShowStandardAd();

@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2020.1.2
+  bundleVersion: 1.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -172,9 +172,9 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.VenomGameStudio.SavetheMonkey
   buildNumber: {}
-  AndroidBundleVersionCode: 4
-  AndroidMinSdkVersion: 24
-  AndroidTargetSdkVersion: 29
+  AndroidBundleVersionCode: 7
+  AndroidMinSdkVersion: 23
+  AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -251,7 +251,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: D:/Unity Workspace/Key/VenomGameStudio.keystore
-  AndroidKeyaliasName: savethemonkey
+  AndroidKeyaliasName: save-the-monkey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
@@ -659,6 +659,7 @@ PlayerSettings:
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 0
+  assemblyVersionValidation: 1
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
@@ -708,6 +709,7 @@ PlayerSettings:
   XboxOneCapability: []
   XboxOneGameRating: {}
   XboxOneIsContentPackage: 0
+  XboxOneEnhancedXboxCompatibilityMode: 0
   XboxOneEnableGPUVariability: 1
   XboxOneSockets: {}
   XboxOneSplashScreen: {fileID: 0}
@@ -721,6 +723,10 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 0
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -736,7 +742,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   cloudProjectId: 0283d520-14a3-4092-aed0-c8844ce51295
   framebufferDepthMemorylessMode: 0
-  projectName: Climbing Monkey
+  projectName: Save the Monkey
   organizationId: unity_emonpjxytm70bq
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

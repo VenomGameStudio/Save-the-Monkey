@@ -7,39 +7,33 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 targetPos;
     private Vector3 playerScale;
-    private float screenWidth;
+    private float screenHeight;
 
     void Start()
     {
-        screenWidth = Screen.width;
+        screenHeight = Screen.height - (Screen.height * 0.2f);
         playerScale = transform.localScale;
         targetPos = new Vector2(1.45f, -3f);
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.touchCount > 0)
+#if UNITY_EDITOR_WIN
+        MovePlayer(Input.GetAxis("Horizontal"));
+#else
+        if (Input.touchCount > 0 && !PauseScript.gameIsPause)
         {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Began)
             {
-                //if (touch.position.x < Screen.width/2 && transform.position.x > -1.75f)
-                if (touch.position.x > Screen.width / 2)
-                {
-                    MovePlayer(1);
-                }
-                if (touch.position.x < Screen.width / 2)
-                {
-                    MovePlayer(-1);
-                }
+                if(touch.position.y < screenHeight)
+                    if (touch.position.x > Screen.width / 2)
+                        MovePlayer(1);
+                    if (touch.position.x < Screen.width / 2)
+                        MovePlayer(-1);
             }
         }
-    }
-    private void FixedUpdate()
-    {
-#if UNITY_EDITOR
-        MovePlayer(Input.GetAxis("Horizontal"));
 #endif
     }
 
@@ -56,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             playerScale.y = -1;
         }
 
-        FindObjectOfType<AudioManagerScript>().Play("Jump");
+        //FindObjectOfType<AudioManagerScript>().Play("Jump");
         player.transform.position = Vector2.MoveTowards(player.transform.position, targetPos, moveSpeed * Time.deltaTime);
         player.transform.localScale = playerScale;
     }
@@ -67,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<PauseScript>().gameOverUI.SetActive(true);
             Time.timeScale = 0f;
+            UnityAdManagerScript.ShowBanner();
             Destroy(gameObject);
         }
     }

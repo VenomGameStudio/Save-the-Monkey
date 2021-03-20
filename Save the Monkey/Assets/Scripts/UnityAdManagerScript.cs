@@ -5,10 +5,12 @@ using UnityEngine.Advertisements;
 
 public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
 {
+    public static UnityAdManagerScript instance;
+
 #if UNITY_ANDROID
-    private static readonly string storeId = "3949061";
+    private static readonly string storeId = "3936591";
 #elif UNITY_IOS
-    private static readonly string storeId = "3949060";
+    private static readonly string storeId = "3936590";
 #endif
 
     private static readonly string videoID = "video";
@@ -25,7 +27,6 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
     private static bool testMode = false;
 #endif
 
-    public static UnityAdManagerScript instance;
 
     public bool isRunning;
 
@@ -76,7 +77,6 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
         Advertisement.Banner.Show(bannerID);
     }
     
-
     public void OnUnityAdsDidStart(string placementId)
     {
         isRunning = true;
