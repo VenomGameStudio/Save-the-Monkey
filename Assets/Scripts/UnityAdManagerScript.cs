@@ -18,9 +18,9 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
     private Action adFailed;
 
 #if UNITY_ANDROID
-    private static bool testMode = false;
+    [SerializeField] private static bool testMode = false;
 #else
-    private static bool testMode = true;
+    [SerializeField] private static bool testMode = true;
 #endif
 
     public bool isRunning;
