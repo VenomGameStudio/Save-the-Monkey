@@ -10,7 +10,8 @@ public class AudioManagerScript : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        instance = this;
+        /*if (instance == null)
             instance = this;
         else
         {
@@ -18,7 +19,7 @@ public class AudioManagerScript : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);*/
 
         foreach (Sound s in sounds)
         {

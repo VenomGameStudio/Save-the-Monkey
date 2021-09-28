@@ -27,7 +27,7 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
 
     private void Awake()
     {
-        if (instance == null)
+        /*if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -35,7 +35,11 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
             Advertisement.Initialize(storeId, testMode);
         }
         else
-            Destroy(gameObject);
+            Destroy(gameObject);*/
+
+        instance = this;
+        Advertisement.AddListener(this);
+        Advertisement.Initialize(storeId, testMode);
     }
 
     public static void ShowStandardAd()

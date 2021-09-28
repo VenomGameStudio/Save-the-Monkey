@@ -5,7 +5,7 @@ public class MenuScript : MonoBehaviour
 {
     private void OnEnable()
     {
-        UnityAdManagerScript.ShowBanner();
+        //UnityAdManagerScript.ShowBanner();
     }
 
     public void PlayGame()

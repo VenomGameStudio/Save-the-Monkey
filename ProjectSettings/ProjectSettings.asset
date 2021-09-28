@@ -247,7 +247,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: .android/VenomGameStudio.keystore'
+  AndroidKeystoreName: D:/Unity Workspace/Unity Keystore/Key/VenomGameStudio.keystore
   AndroidKeyaliasName: save-the-monkey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -743,7 +743,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 0
-    Collab: 1
+    Collab: 0
     ErrorHub: 0
     Hub: 0
     UNet: 1
