@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Fader")]
-    public GameObject currentFader;
+    GameObject currentFader;
     public GameObject fader;
 
     private void Awake() => instance = this;
