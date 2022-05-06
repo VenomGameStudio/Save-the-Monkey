@@ -11,11 +11,11 @@ public class AdsTesterScript : MonoBehaviour
 
     public void ShowBanner()
     {
-        UnityAdManagerScript.ShowBanner();
+        GameManager.instance.adManager.ShowBanner();
     }
 
     public void HideBanner() 
     {
-        UnityAdManagerScript.HideBanner();
+        GameManager.instance.adManager.HideBanner();
     }
 }

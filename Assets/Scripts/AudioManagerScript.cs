@@ -6,21 +6,8 @@ public class AudioManagerScript : MonoBehaviour
 {
     public Sound[] sounds;
 
-    public static AudioManagerScript instance;
-
     void Awake()
     {
-        instance = this;
-        /*if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);*/
-
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

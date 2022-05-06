@@ -5,11 +5,28 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("Fader")]
-    GameObject currentFader;
-    public GameObject fader;
+    [Header("Managers")]
+    public AudioManagerScript audioManager;
+    public UnityAdManagerScript adManager;
 
-    private void Awake() => instance = this;
+    [Header("Fader")]
+    public GameObject fader;
+    GameObject currentFader;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     public void ShowFade()
     {
