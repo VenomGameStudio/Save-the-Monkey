@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<PauseScript>().gameOverUI.SetActive(true);
             Time.timeScale = 0f;
-            GameManager.instance.adManager.ShowBanner();
+            //GameManager.instance.adManager.ShowBanner();
             Destroy(gameObject);
         }
     }

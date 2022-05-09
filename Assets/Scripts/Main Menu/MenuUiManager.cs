@@ -1,7 +1,7 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
@@ -23,9 +23,20 @@ public class MenuUiManager : MonoBehaviour
 
     [Header("Home")]
     public Button playBtn;
+    public Button settingBtn;
     public Button exitBtn;
 
-    [SerializeField] Panel currentPanel = null;
+    [Header("Settings")]
+    public Button closeBtn;
+    public GameObject[] musicToggle = new GameObject[2];
+    public GameObject[] effectsToggle = new GameObject[2];
+    public Slider volSlider;
+    public Button helpBtn, policyBtn, creditsBtn;
+
+    [Header("Help")]
+    public Button hCloseBtn;
+
+    Panel currentPanel = null;
     private Panel CurrentPanel { get => currentPanel; set { currentPanel = value; WindowUpdated(currentPanel); } }
 
     private void Awake()
@@ -41,11 +52,11 @@ public class MenuUiManager : MonoBehaviour
 
     void ChangeWindow(LocalizationKeys name)
     {
-        if (CurrentPanel.panelObject != null)
+        if (CurrentPanel != null && CurrentPanel.panelObject != null)
             CurrentPanel.panelObject.SetActive(false);
 
         CurrentPanel = uiPanels.Find((x) => x.key == name);
-        if (CurrentPanel.panelObject != null)
+        if (CurrentPanel != null && CurrentPanel.panelObject != null)
             CurrentPanel.panelObject.SetActive(true);
     }
 
@@ -55,36 +66,28 @@ public class MenuUiManager : MonoBehaviour
         {
             case LocalizationKeys.Loading:
                 loadingSlider.value = 0f;
-                StartCoroutine(StartLoading());
+                loadingSlider.DOValue(1f, 1f).OnComplete(() =>
+                {
+                    GameManager.Instance.ShowFade(LocalizationKeys.Loading.ToString(), () => { ChangeWindow(LocalizationKeys.Home); });
+                });
                 break;
             case LocalizationKeys.Home:
                 SetupHomeBtn(); break;
+            case LocalizationKeys.Setting:
+                SetupSettingPanel(); break;
+            case LocalizationKeys.Help:
+                SetupHelpPanel(); break;
             default:
                 Debug.LogError("No window is setup"); break;
         }
     }
 
-    #region Loading
-    IEnumerator StartLoading()
-    {
-        while (loadingSlider.value < 1)
-        {
-            yield return new WaitForEndOfFrame();
-            loadingSlider.value += 0.01f;
-        }
-
-        GameManager.instance.ShowFade();
-
-        yield return new WaitForSeconds(1f);
-        ChangeWindow(LocalizationKeys.Home);
-    }
-    #endregion
-
     #region Home
     void SetupHomeBtn()
     {
-        playBtn.OnClick(() => OnClickStartBtn());
-        exitBtn.OnClick(() => OnClickQuitBtn());
+        playBtn.OnClick(delegate { OnClickStartBtn(); });
+        settingBtn.OnClick(delegate { ChangeWindow(LocalizationKeys.Setting); });
+        exitBtn.OnClick(delegate { OnClickQuitBtn(); });
     }
     void OnClickStartBtn()
     {
@@ -99,6 +102,47 @@ public class MenuUiManager : MonoBehaviour
 #endif
     }
     #endregion
+
+    #region Settings
+    void SetupSettingPanel()
+    {
+        DoOpenPanel();
+
+        closeBtn.OnClick(delegate { DoClosePanel(LocalizationKeys.Home); });
+        helpBtn.OnClick(delegate { OpenHelp(); });
+
+        void OpenHelp()
+        {
+            ChangeWindow(LocalizationKeys.Help);
+        }
+    }
+    #endregion
+
+    #region Help
+    void SetupHelpPanel()
+    {
+        DoOpenPanel();
+        hCloseBtn.OnClick(delegate { DoClosePanel(LocalizationKeys.Setting); });
+    }
+    #endregion
+
+    void DoOpenPanel()
+    {
+        Vector3 extraScale = new Vector3(0.3f, 0.3f, 0.3f);
+        CurrentPanel.panelObject.transform.localScale = Vector3.zero;
+        CurrentPanel.panelObject.transform.DOBlendableScaleBy(Vector3.one + extraScale, 0.3f).OnComplete(() =>
+        {
+            CurrentPanel.panelObject.transform.DOBlendableScaleBy(-extraScale, 0.3f);
+        });
+    }
+    void DoClosePanel(LocalizationKeys keys)
+    {
+        CurrentPanel.panelObject.transform.DOBlendableScaleBy(-Vector3.one, 0.3f).OnComplete(() =>
+        {
+            CurrentPanel.panelObject.transform.localScale = Vector3.zero;
+            ChangeWindow(keys);
+        });
+    }
 
     [ContextMenu("SetName")]
     void SetName()

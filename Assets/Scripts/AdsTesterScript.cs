@@ -2,7 +2,7 @@
 
 public class AdsTesterScript : MonoBehaviour
 {
-    public static AdsTesterScript instace;
+    /*public static AdsTesterScript instace;
     
     public void StanderedAd()
     {
@@ -17,5 +17,5 @@ public class AdsTesterScript : MonoBehaviour
     public void HideBanner() 
     {
         GameManager.instance.adManager.HideBanner();
-    }
+    }*/
 }

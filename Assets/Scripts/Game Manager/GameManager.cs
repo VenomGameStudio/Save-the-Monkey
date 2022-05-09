@@ -1,38 +1,49 @@
 using UnityEngine;
-using System.Collections;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
     [Header("Managers")]
     public AudioManagerScript audioManager;
     public UnityAdManagerScript adManager;
 
     [Header("Fader")]
-    public GameObject fader;
-    GameObject currentFader;
+    public CanvasGroup fader;
+    public Text faedText;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            if (instance != this)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-        }
-        DontDestroyOnLoad(this.gameObject);
+        fader.alpha = 0f;
+        fader.gameObject.SetActive(false);
     }
 
-    public void ShowFade()
+    public void ShowFade(string text = "", System.Action onComplete = null)
     {
-        if (currentFader == null)
-            currentFader = Instantiate(fader, GameObject.FindGameObjectWithTag("Game Canvas").transform);
+        fader.gameObject.SetActive(true);
+        faedText.text = text;
+        fader.DOFade(1f, 1f).OnComplete(() =>
+        {
+            fader.DOFade(0f, 0.5f).OnComplete(() =>
+            {
+                onComplete?.Invoke();
+                fader.gameObject.SetActive(false);
+            });
+        });
+    }
 
-        Destroy(currentFader, currentFader.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + 1f);
+    static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Instance = FindObjectOfType<GameManager>();
+            return _instance;
+        }
+        set
+        {
+            _instance = value;
+        }
     }
 }

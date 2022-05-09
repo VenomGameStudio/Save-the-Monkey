@@ -3,9 +3,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Advertisements;
 
-public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
+public class UnityAdManagerScript : MonoBehaviour//, IUnityAdsListener
 {
-    private static readonly string storeId = "3936591";
+    /*private static readonly string storeId = "3936591";
 
     private static readonly string videoID = "video";
     private static readonly string rewardedID = "rewardedVideo";
@@ -25,7 +25,7 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
 
     private void Awake()
     {
-        Advertisement.AddListener(this);
+        //Advertisement.AddListener(this);
         Advertisement.Initialize(storeId, testMode);
     }
 
@@ -37,7 +37,7 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
 
     public void ShowBanner()
     {
-        StartCoroutine(ShowBannerWhenRead());
+        //StartCoroutine(ShowBannerWhenRead());
     }
 
     public void HideBanner()
@@ -93,5 +93,5 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
     }
 
     public void OnUnityAdsReady(string placementId) { }
-    public void OnUnityAdsDidError(string message) { }
+    public void OnUnityAdsDidError(string message) { }*/
 }
