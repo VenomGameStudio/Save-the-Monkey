@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public CanvasGroup fader;
     public Text faedText;
 
+    public const string policyLink = "https://venomgamestudio.blogspot.com/2020/12/privacy-policy.html?m=1";
+
     private void Awake()
     {
         fader.alpha = 0f;

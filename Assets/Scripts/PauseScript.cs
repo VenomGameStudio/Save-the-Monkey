@@ -36,8 +36,7 @@ public class PauseScript : MonoBehaviour
     public void Home()
     {
         Time.timeScale = 1f;
-        Debug.Log("To be fixed.. //ananta");
-        //SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
 
     public void Restart()

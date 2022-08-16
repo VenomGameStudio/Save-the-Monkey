@@ -28,7 +28,9 @@ public class MenuUiManager : MonoBehaviour
 
     [Header("Settings")]
     public Button closeBtn;
+    public Button musicBtn;
     public GameObject[] musicToggle = new GameObject[2];
+    public Button effectsBtn;
     public GameObject[] effectsToggle = new GameObject[2];
     public Slider volSlider;
     public Button helpBtn, policyBtn, creditsBtn;
@@ -109,12 +111,32 @@ public class MenuUiManager : MonoBehaviour
         DoOpenPanel();
 
         closeBtn.OnClick(delegate { DoClosePanel(LocalizationKeys.Home); });
-        helpBtn.OnClick(delegate { OpenHelp(); });
 
-        void OpenHelp()
+        bool musicValue = GameManager.Instance.audioManager.CanPlayMusic;
+        MusicValue(musicValue);
+        void MusicValue(bool value)
         {
-            ChangeWindow(LocalizationKeys.Help);
+            GameManager.Instance.audioManager.CanPlayMusic = value;
+            PlayerPrefs.SetInt(GenericKeys.Music, value ? 1 : 0);
+            musicToggle[0].SetActive(value);
+            musicToggle[1].SetActive(!value);
         }
+        musicBtn.OnClick(delegate { musicValue = !musicValue; MusicValue(musicValue); });
+
+        bool effectValue = GameManager.Instance.audioManager.canPlayEffects;
+        EffectValue(effectValue);
+        void EffectValue(bool value)
+        {
+            GameManager.Instance.audioManager.canPlayEffects = value;
+            PlayerPrefs.SetInt(GenericKeys.Effect, value ? 1 : 0);
+            effectsToggle[0].SetActive(value);
+            effectsToggle[1].SetActive(!value);
+        }
+        effectsBtn.OnClick(delegate { effectValue = !effectValue; EffectValue(effectValue); });
+
+        helpBtn.OnClick(delegate { ChangeWindow(LocalizationKeys.Help); });
+        policyBtn.OnClick(delegate { Application.OpenURL(GameManager.policyLink); });
+        creditsBtn.interactable = false;
     }
     #endregion
 
