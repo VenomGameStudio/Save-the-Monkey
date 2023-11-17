@@ -119,7 +119,7 @@ namespace IngameDebugConsole
 		private static readonly string[] inputDelimiters = new string[] { "\"\"", "''", "{}", "()", "[]" };
 
 		// CompareInfo used for case-insensitive command name comparison
-		private static readonly CompareInfo caseInsensitiveComparer = new CultureInfo( "en-US" ).CompareInfo;
+		internal static readonly CompareInfo caseInsensitiveComparer = new CultureInfo( "en-US" ).CompareInfo;
 
 		static DebugLogConsole()
 		{
@@ -230,10 +230,7 @@ namespace IngameDebugConsole
 
 			// After typing help, the log that lists all the commands should automatically be expanded for better UX
 			if( DebugLogManager.Instance )
-			{
-				DebugLogManager.Instance.ExpandLatestPendingLog();
-				DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-			}
+				DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 		}
 
 		// Logs the list of available commands that are either equal to commandName or contain commandName as substring
@@ -264,10 +261,7 @@ namespace IngameDebugConsole
 				Debug.Log( stringBuilder.ToString() );
 
 				if( DebugLogManager.Instance )
-				{
-					DebugLogManager.Instance.ExpandLatestPendingLog();
-					DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-				}
+					DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 			}
 		}
 
@@ -312,10 +306,7 @@ namespace IngameDebugConsole
 
 			// After typing sysinfo, the log that lists system information should automatically be expanded for better UX
 			if( DebugLogManager.Instance )
-			{
-				DebugLogManager.Instance.ExpandLatestPendingLog();
-				DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-			}
+				DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 		}
 
 		private static StringBuilder AppendSysInfoIfPresent( this StringBuilder sb, string info, string postfix = null )
@@ -693,10 +684,7 @@ namespace IngameDebugConsole
 
 					// The log that lists method signature(s) for this command should automatically be expanded for better UX
 					if( DebugLogManager.Instance )
-					{
-						DebugLogManager.Instance.ExpandLatestPendingLog();
-						DebugLogManager.Instance.StripStackTraceFromLatestPendingLog();
-					}
+						DebugLogManager.Instance.AdjustLatestPendingLog( true, true );
 				}
 
 				return;
