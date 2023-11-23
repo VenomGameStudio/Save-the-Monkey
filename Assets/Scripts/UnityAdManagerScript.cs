@@ -3,11 +3,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Advertisements;
 
-public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
+public class UnityAdManagerScript : MonoBehaviour//, IUnityAdsListener
 {
-    public static UnityAdManagerScript instance;
-
-    private static readonly string storeId = "3936591";
+    /*private static readonly string storeId = "3936591";
 
     private static readonly string videoID = "video";
     private static readonly string rewardedID = "rewardedVideo";
@@ -27,15 +25,8 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            Advertisement.AddListener(this);
-            Advertisement.Initialize(storeId, testMode);
-        }
-        else
-            Destroy(gameObject);
+        //Advertisement.AddListener(this);
+        Advertisement.Initialize(storeId, testMode);
     }
 
     public static void ShowStandardAd()
@@ -44,26 +35,26 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
             Advertisement.Show(videoID);
     }
 
-    public static void ShowBanner()
+    public void ShowBanner()
     {
-        instance.StartCoroutine(ShowBannerWhenRead());
+        //StartCoroutine(ShowBannerWhenRead());
     }
 
-    public static void HideBanner()
+    public void HideBanner()
     {
         Advertisement.Banner.Hide();
     }
 
-    public static void ShowRewardedAd(Action success, Action skipped, Action failed)
+    public void ShowRewardedAd(Action success, Action skipped, Action failed)
     {
-        instance.adSuccess = success;
-        instance.adSkipped = skipped;
-        instance.adFailed = failed;
+        adSuccess = success;
+        adSkipped = skipped;
+        adFailed = failed;
         if (Advertisement.IsReady(rewardedID))
             Advertisement.Show(rewardedID);
     }
 
-    private static IEnumerator ShowBannerWhenRead()
+    private IEnumerator ShowBannerWhenRead()
     {
         while (!Advertisement.IsReady(bannerID))
             yield return new WaitForSeconds(0.5f);
@@ -102,5 +93,5 @@ public class UnityAdManagerScript : MonoBehaviour, IUnityAdsListener
     }
 
     public void OnUnityAdsReady(string placementId) { }
-    public void OnUnityAdsDidError(string message) { }
+    public void OnUnityAdsDidError(string message) { }*/
 }

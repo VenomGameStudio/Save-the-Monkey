@@ -1,0 +1,174 @@
+using System;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
+[Serializable]
+public class Panel
+{
+    public string name;
+    public LocalizationKeys key;
+    public GameObject panelObject;
+}
+
+public class MenuUiManager : MonoBehaviour
+{
+    public LocalizationKeys startPanel;
+    public List<Panel> uiPanels = new List<Panel>();
+
+    [Header("Loading")]
+    public Slider loadingSlider;
+
+    [Header("Home")]
+    public Button playBtn;
+    public Button settingBtn;
+    public Button exitBtn;
+
+    [Header("Settings")]
+    public Button closeBtn;
+    public Button musicBtn;
+    public GameObject[] musicToggle = new GameObject[2];
+    public Button effectsBtn;
+    public GameObject[] effectsToggle = new GameObject[2];
+    public Slider volSlider;
+    public Button helpBtn, policyBtn, creditsBtn;
+
+    [Header("Help")]
+    public Button hCloseBtn;
+
+    Panel currentPanel = null;
+    private Panel CurrentPanel { get => currentPanel; set { currentPanel = value; WindowUpdated(currentPanel); } }
+
+    private void Awake()
+    {
+        Init();
+    }
+
+    void Init()
+    {
+        uiPanels.ForEach((x) => x.panelObject.SetActive(false));
+        ChangeWindow(startPanel);
+    }
+
+    void ChangeWindow(LocalizationKeys name)
+    {
+        if (CurrentPanel != null && CurrentPanel.panelObject != null)
+            CurrentPanel.panelObject.SetActive(false);
+
+        CurrentPanel = uiPanels.Find((x) => x.key == name);
+        if (CurrentPanel != null && CurrentPanel.panelObject != null)
+            CurrentPanel.panelObject.SetActive(true);
+    }
+
+    void WindowUpdated(Panel panel)
+    {
+        switch (panel.key)
+        {
+            case LocalizationKeys.Loading:
+                loadingSlider.value = 0f;
+                loadingSlider.DOValue(1f, 1f).OnComplete(() =>
+                {
+                    GameManager.Instance.ShowFade(LocalizationKeys.Loading.ToString(), () => { ChangeWindow(LocalizationKeys.Home); });
+                });
+                break;
+            case LocalizationKeys.Home:
+                SetupHomeBtn(); break;
+            case LocalizationKeys.Setting:
+                SetupSettingPanel(); break;
+            case LocalizationKeys.Help:
+                SetupHelpPanel(); break;
+            default:
+                Debug.LogError("No window is setup"); break;
+        }
+    }
+
+    #region Home
+    void SetupHomeBtn()
+    {
+        playBtn.OnClick(delegate { OnClickStartBtn(); });
+        settingBtn.OnClick(delegate { ChangeWindow(LocalizationKeys.Setting); });
+        exitBtn.OnClick(delegate { OnClickQuitBtn(); });
+    }
+    void OnClickStartBtn()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    void OnClickQuitBtn()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    #endregion
+
+    #region Settings
+    void SetupSettingPanel()
+    {
+        DoOpenPanel();
+
+        closeBtn.OnClick(delegate { DoClosePanel(LocalizationKeys.Home); });
+
+        bool musicValue = GameManager.Instance.audioManager.CanPlayMusic;
+        MusicValue(musicValue);
+        void MusicValue(bool value)
+        {
+            GameManager.Instance.audioManager.CanPlayMusic = value;
+            PlayerPrefs.SetInt(GenericKeys.Music, value ? 1 : 0);
+            musicToggle[0].SetActive(value);
+            musicToggle[1].SetActive(!value);
+        }
+        musicBtn.OnClick(delegate { musicValue = !musicValue; MusicValue(musicValue); });
+
+        bool effectValue = GameManager.Instance.audioManager.canPlayEffects;
+        EffectValue(effectValue);
+        void EffectValue(bool value)
+        {
+            GameManager.Instance.audioManager.canPlayEffects = value;
+            PlayerPrefs.SetInt(GenericKeys.Effect, value ? 1 : 0);
+            effectsToggle[0].SetActive(value);
+            effectsToggle[1].SetActive(!value);
+        }
+        effectsBtn.OnClick(delegate { effectValue = !effectValue; EffectValue(effectValue); });
+
+        helpBtn.OnClick(delegate { ChangeWindow(LocalizationKeys.Help); });
+        policyBtn.OnClick(delegate { Application.OpenURL(GameManager.policyLink); });
+        creditsBtn.interactable = false;
+    }
+    #endregion
+
+    #region Help
+    void SetupHelpPanel()
+    {
+        DoOpenPanel();
+        hCloseBtn.OnClick(delegate { DoClosePanel(LocalizationKeys.Setting); });
+    }
+    #endregion
+
+    void DoOpenPanel()
+    {
+        Vector3 extraScale = new Vector3(0.3f, 0.3f, 0.3f);
+        CurrentPanel.panelObject.transform.localScale = Vector3.zero;
+        CurrentPanel.panelObject.transform.DOBlendableScaleBy(Vector3.one + extraScale, 0.3f).OnComplete(() =>
+        {
+            CurrentPanel.panelObject.transform.DOBlendableScaleBy(-extraScale, 0.3f);
+        });
+    }
+    void DoClosePanel(LocalizationKeys keys)
+    {
+        CurrentPanel.panelObject.transform.DOBlendableScaleBy(-Vector3.one, 0.3f).OnComplete(() =>
+        {
+            CurrentPanel.panelObject.transform.localScale = Vector3.zero;
+            ChangeWindow(keys);
+        });
+    }
+
+    [ContextMenu("SetName")]
+    void SetName()
+    {
+        uiPanels.ForEach((x) => x.name = x.key.ToString().ToLower());
+    }
+}

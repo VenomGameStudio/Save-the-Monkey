@@ -57,11 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Trunk"))
+        if (collision.CompareTag("Trunk"))
         {
             FindObjectOfType<PauseScript>().gameOverUI.SetActive(true);
             Time.timeScale = 0f;
-            UnityAdManagerScript.ShowBanner();
+            //GameManager.instance.adManager.ShowBanner();
             Destroy(gameObject);
         }
     }
